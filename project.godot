@@ -12,4 +12,12 @@ config_version=5
 
 config/name="summer game"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://art/icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://art/": "red",
+"res://code/": "green",
+"res://scenes/": "teal"
+}
