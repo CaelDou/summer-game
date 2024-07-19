@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsmi8fs4tf30s"]
+
+[ext_resource type="Texture2D" uid="uid://cf55306gfkmg" path="res://art/interface/nigredo.png" id="2_6miiv"]
+[ext_resource type="Script" path="res://scripts/vein.gd" id="2_dhw08"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bsnvs"]
+radius = 301.002
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2vvh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6miiv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="NigredoVein" type="Area2D"]
+collision_mask = 0
+script = ExtResource("2_dhw08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bsnvs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(9, 9)
+sprite_frames = SubResource("SpriteFrames_t2vvh")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -175.0
+offset_right = 28.0
+offset_bottom = -112.0
+theme_override_font_sizes/font_size = 45
+text = "[E]"
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -125.0
+offset_top = -110.0
+offset_right = 126.0
+offset_bottom = -83.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

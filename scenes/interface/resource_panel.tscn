@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://b86udfs5crd6r"]
+
+[ext_resource type="Texture2D" uid="uid://cf55306gfkmg" path="res://art/interface/nigredo.png" id="1_vywy4"]
+[ext_resource type="Texture2D" uid="uid://bk614uelb4q7h" path="res://art/interface/citrinitas.png" id="2_mptok"]
+[ext_resource type="Texture2D" uid="uid://cerdx2lblgjtu" path="res://art/interface/albedo.png" id="3_bahtp"]
+[ext_resource type="Texture2D" uid="uid://bl7gh7e27yrbk" path="res://art/interface/rubedo.png" id="4_xcm73"]
+
+[node name="ResourcePanel" type="PanelContainer"]
+offset_right = 84.0
+offset_bottom = 48.0
+scale = Vector2(0.310739, 0.310739)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="Nigredo" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("1_vywy4")
+
+[node name="Citrinitas" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("2_mptok")
+
+[node name="Albedo" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_bahtp")
+
+[node name="Rubedo" type="TextureRect" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("4_xcm73")
+
+[node name="NigredoLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="CitrinitasLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878384, 0.893748, 0.272978, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="AlbedoLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 162
+
+[node name="RubedoLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.915698, 0.199163, 0.133791, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 # reference to the AnimatedSprite2D node
 @onready var anim = $AnimatedSprite2D
