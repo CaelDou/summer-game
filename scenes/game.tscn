@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ek44v0h3ij6f"]
+[gd_scene load_steps=16 format=3 uid="uid://ek44v0h3ij6f"]
 
-[ext_resource type="PackedScene" path="res://scenes/game_manager.tscn" id="1_avxpm"]
+[ext_resource type="PackedScene" uid="uid://c22v4aqfvr7uu" path="res://scenes/game_manager.tscn" id="1_avxpm"]
 [ext_resource type="PackedScene" uid="uid://dhd5tae517tdq" path="res://scenes/player.tscn" id="1_mgs8s"]
 [ext_resource type="Texture2D" uid="uid://kctx3jaxlv85" path="res://art/tilemap_placeholder.png" id="2_2c2lw"]
 [ext_resource type="PackedScene" uid="uid://dsmi8fs4tf30s" path="res://scenes/Veins/nigredo_vein.tscn" id="6_1im8r"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bcx2ryekqw7gk" path="res://scenes/corrupted_chicken.tscn" id="9_fgw86"]
 [ext_resource type="PackedScene" uid="uid://cdat4obakt2mm" path="res://scenes/Veins/albedo_vein.tscn" id="9_i8tba"]
 [ext_resource type="PackedScene" uid="uid://divoexcgopokd" path="res://scenes/Veins/rubedo_vein.tscn" id="10_31wvx"]
+[ext_resource type="PackedScene" uid="uid://bc6khg0mihgsr" path="res://scenes/corrupted_goat.tscn" id="11_3vuvj"]
 [ext_resource type="PackedScene" uid="uid://b8sqyhwlaxdd2" path="res://scenes/Veins/citrinitas_vein.tscn" id="11_4k7uy"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_43bie"]
@@ -483,6 +484,10 @@ position_smoothing_enabled = true
 
 [node name="Interface" parent="CanvasLayer" instance=ExtResource("7_rgnyr")]
 script = ExtResource("8_dw4rq")
+
+[node name="CorruptedGoat" parent="." instance=ExtResource("11_3vuvj")]
+position = Vector2(-384, 229)
+scale = Vector2(10, 10)
 
 [connection signal="body_entered" from="NigredoVein" to="GameManager" method="_on_nigredo_vein_body_entered"]
 
