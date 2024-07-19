@@ -9,6 +9,8 @@ enum VeinType { NIGREDO, CITRINITAS, ALBEDO, RUBEDO }
 
 var player_colliding: bool = false
 
+const Player = preload("res://scripts/player.gd")
+
 # hardness is the time needed to harness a vein
 # hold_time is compared to hardness to check if the vein should be harnessed
 @export var hardness: float = 2.0

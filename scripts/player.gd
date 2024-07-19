@@ -5,7 +5,7 @@ class_name Player
 @onready var anim = $AnimatedSprite2D
 
 # =====< movement >=====
-@export var speed: float = 100 # max speed
+@export var speed: float = 200 # max speed
 @export var accel: float = 10  # how quickly the player get to max speed
 var direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2 = Vector2.ZERO
