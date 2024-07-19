@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://qtaggxowjwe6"]
+[gd_scene load_steps=6 format=3 uid="uid://qtaggxowjwe6"]
 
 [ext_resource type="PackedScene" uid="uid://b86udfs5crd6r" path="res://scenes/interface/resource_panel.tscn" id="1_xre35"]
+[ext_resource type="Texture2D" uid="uid://grgyjndahg0k" path="res://art/ _nigredo_still.png" id="2_05idk"]
+[ext_resource type="Texture2D" uid="uid://ck6dsvigtoepa" path="res://art/_citrinitas_still.png" id="3_v3s0u"]
+[ext_resource type="Texture2D" uid="uid://qum3sq4pixnh" path="res://art/_albedo_still.png" id="4_degrr"]
+[ext_resource type="Texture2D" uid="uid://6ijav2aaxvyj" path="res://art/_rubedo_still.png" id="5_0dvvf"]
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -13,5 +17,40 @@ grow_vertical = 2
 [node name="ResourcePanel" parent="." instance=ExtResource("1_xre35")]
 layout_mode = 0
 scale = Vector2(2.92, 2.92)
+
+[node name="MarginContainer" parent="ResourcePanel" index="0"]
+theme_override_constants/margin_left = -1
+theme_override_constants/margin_top = -1
+theme_override_constants/margin_right = -1
+theme_override_constants/margin_bottom = 0
+
+[node name="Nigredo" parent="ResourcePanel/MarginContainer/GridContainer" index="0"]
+texture = ExtResource("2_05idk")
+
+[node name="Citrinitas" parent="ResourcePanel/MarginContainer/GridContainer" index="1"]
+texture = ExtResource("3_v3s0u")
+
+[node name="Albedo" parent="ResourcePanel/MarginContainer/GridContainer" index="2"]
+texture = ExtResource("4_degrr")
+
+[node name="Rubedo" parent="ResourcePanel/MarginContainer/GridContainer" index="3"]
+texture = ExtResource("5_0dvvf")
+
+[node name="NigredoLabel" parent="ResourcePanel/MarginContainer/GridContainer" index="4"]
+theme_override_colors/font_color = Color(0.431373, 0.34902, 0.501961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="CitrinitasLabel" parent="ResourcePanel/MarginContainer/GridContainer" index="5"]
+theme_override_colors/font_color = Color(0.827451, 0.537255, 0.196078, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="AlbedoLabel" parent="ResourcePanel/MarginContainer/GridContainer" index="6"]
+theme_override_colors/font_color = Color(0.74902, 0.772549, 0.831373, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="RubedoLabel" parent="ResourcePanel/MarginContainer/GridContainer" index="7"]
+theme_override_colors/font_color = Color(0.717647, 0.278431, 0.192157, 1)
+theme_override_font_sizes/font_size = 14
 
 [editable path="ResourcePanel"]
