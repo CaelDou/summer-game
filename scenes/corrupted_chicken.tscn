@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcx2ryekqw7gk"]
+
+[ext_resource type="Script" path="res://scripts/random_movement.gd" id="1_qou4f"]
+[ext_resource type="Texture2D" uid="uid://bx4g4n7flpwwd" path="res://art/corrupted_chicken/_corrupted_chicken_idle.png" id="2_2opre"]
+[ext_resource type="Texture2D" uid="uid://d4itvhw5i87a4" path="res://art/corrupted_chicken/corrupted_chicken_walk_0001.png" id="3_p4t6u"]
+[ext_resource type="Texture2D" uid="uid://dqcqr0fldrk7m" path="res://art/corrupted_chicken/corrupted_chicken_walk_0002.png" id="4_77x72"]
+[ext_resource type="Texture2D" uid="uid://co1j6pnswefxb" path="res://art/corrupted_chicken/corrupted_chicken_walk_0003.png" id="5_0a5a0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_64u2s"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp4xu"]
+atlas = ExtResource("2_2opre")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uibif"]
+atlas = ExtResource("2_2opre")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21u2d"]
+atlas = ExtResource("2_2opre")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgt4p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp4xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uibif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21u2d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_p4t6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_77x72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0a5a0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="Corrupted_Chicken" type="CharacterBody2D"]
+scale = Vector2(9, 9)
+collision_layer = 0
+script = ExtResource("1_qou4f")
+boundary = 750.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CircleShape2D_64u2s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sgt4p")
+animation = &"walk"
+frame = 1
+frame_progress = 0.720288
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
