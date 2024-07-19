@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx4g4n7flpwwd"
-path="res://.godot/imported/_corrupted_chicken_idle.png-b2fd38ac18bf40874a98cab97631a081.ctex"
+uid="uid://bmo3ehmltmja2"
+path="res://.godot/imported/_corrupted_chicken.png-4ea626b001a8d526d9eb3a7408339547.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/_corrupted_chicken_idle.png"
-dest_files=["res://.godot/imported/_corrupted_chicken_idle.png-b2fd38ac18bf40874a98cab97631a081.ctex"]
+source_file="res://art/corrupted_chicken/_corrupted_chicken.png"
+dest_files=["res://.godot/imported/_corrupted_chicken.png-4ea626b001a8d526d9eb3a7408339547.ctex"]
 
 [params]
 

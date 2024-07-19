@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4itvhw5i87a4"
-path="res://.godot/imported/corrupted_chicken_walk_0001.png-bad755fbb63eab6750007a4fccd2ad4f.ctex"
+uid="uid://dqcqr0fldrk7m"
+path="res://.godot/imported/corrupted_chicken_walk_0002.png-17cebaf469be4a548d8ef2aff5bda7c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/corrupted_chicken_walk_0001.png"
-dest_files=["res://.godot/imported/corrupted_chicken_walk_0001.png-bad755fbb63eab6750007a4fccd2ad4f.ctex"]
+source_file="res://art/corrupted_chicken/corrupted_chicken_walk_0002.png"
+dest_files=["res://.godot/imported/corrupted_chicken_walk_0002.png-17cebaf469be4a548d8ef2aff5bda7c6.ctex"]
 
 [params]
 

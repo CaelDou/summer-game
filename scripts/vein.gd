@@ -3,7 +3,7 @@ extends Area2D
 enum VeinType { NIGREDO, CITRINITAS, ALBEDO, RUBEDO }
 @export var vein_type: VeinType
 
-# gets respective Label and ProgressBar nodes for each vein
+# get respective Label and ProgressBar nodes for each vein
 @onready var interaction_label = $Label
 @onready var progress_bar = $ProgressBar
 
@@ -45,6 +45,6 @@ func _process(delta):
 		_harness_vein()
 
 func _harness_vein():
-	# pass this vein's to handle the match in the function
+	# pass this vein's type to handle the match in the function
 	GameManager.increase_ingredient(vein_type, 1)
 	hold_time = 0.0

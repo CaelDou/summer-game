@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
+const Player = preload("res://scripts/player.gd")
+
 # reference to the AnimatedSprite2D node
 @onready var anim = $AnimatedSprite2D
 

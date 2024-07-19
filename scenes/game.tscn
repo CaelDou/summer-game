@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ek44v0h3ij6f"]
+[gd_scene load_steps=10 format=3 uid="uid://ek44v0h3ij6f"]
 
 [ext_resource type="PackedScene" uid="uid://c22v4aqfvr7uu" path="res://scenes/game_manager.tscn" id="1_avxpm"]
 [ext_resource type="PackedScene" uid="uid://dhd5tae517tdq" path="res://scenes/player.tscn" id="1_mgs8s"]
 [ext_resource type="PackedScene" uid="uid://dsmi8fs4tf30s" path="res://scenes/Veins/nigredo_vein.tscn" id="6_1im8r"]
 [ext_resource type="PackedScene" uid="uid://qtaggxowjwe6" path="res://scenes/interface/interface.tscn" id="7_rgnyr"]
 [ext_resource type="Script" path="res://scripts/interface.gd" id="8_dw4rq"]
+[ext_resource type="PackedScene" uid="uid://bcx2ryekqw7gk" path="res://scenes/corrupted_chicken.tscn" id="9_fgw86"]
 [ext_resource type="PackedScene" uid="uid://cdat4obakt2mm" path="res://scenes/Veins/albedo_vein.tscn" id="9_i8tba"]
 [ext_resource type="PackedScene" uid="uid://divoexcgopokd" path="res://scenes/Veins/rubedo_vein.tscn" id="10_31wvx"]
 [ext_resource type="PackedScene" uid="uid://b8sqyhwlaxdd2" path="res://scenes/Veins/citrinitas_vein.tscn" id="11_4k7uy"]
@@ -12,17 +13,6 @@
 [node name="Game" type="Node2D"]
 
 [node name="GameManager" parent="." instance=ExtResource("1_avxpm")]
-
-[node name="Player" parent="." instance=ExtResource("1_mgs8s")]
-position = Vector2(-1, 60)
-motion_mode = 1
-speed = 300.0
-accel = 30.0
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -60)
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
 
 [node name="NigredoVein" parent="." instance=ExtResource("6_1im8r")]
 position = Vector2(-644, 0)
@@ -38,6 +28,22 @@ vein_type = 2
 [node name="RubedoVein" parent="." instance=ExtResource("10_31wvx")]
 position = Vector2(664, 10)
 vein_type = 3
+
+[node name="Corrupted_Chicken" parent="." instance=ExtResource("9_fgw86")]
+position = Vector2(-267, -26)
+collision_mask = 0
+
+[node name="Player" parent="." instance=ExtResource("1_mgs8s")]
+position = Vector2(-1, 60)
+collision_layer = 1
+motion_mode = 1
+speed = 300.0
+accel = 30.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -60)
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
