@@ -1,12 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://bc6khg0mihgsr"]
+[gd_scene load_steps=33 format=3 uid="uid://bc6khg0mihgsr"]
 
 [ext_resource type="Script" path="res://scripts/random_movement.gd" id="1_as4dr"]
 [ext_resource type="Texture2D" uid="uid://c2ybjj4kkmx1q" path="res://art/corrupted_goat/corrupted_goat_idle.png" id="2_ra6pv"]
 [ext_resource type="Texture2D" uid="uid://wj81hg07cdqb" path="res://art/corrupted_goat/corrupted_goat_walk.png" id="3_hjlgj"]
-[ext_resource type="Texture2D" path="res://art/marks_placeholder.png" id="4_kebts"]
+[ext_resource type="Texture2D" uid="uid://i1bnl2tsvlw3" path="res://art/marks_placeholder.png" id="4_kebts"]
+[ext_resource type="Texture2D" uid="uid://bwrguc4c3eukx" path="res://art/corrupted_goat/corrupted_goat.png" id="5_ialhp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_plqom"]
 radius = 63.1981
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ol8rd"]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bdsuo"]
 radius = 7.0
@@ -14,6 +18,10 @@ radius = 7.0
 [sub_resource type="AtlasTexture" id="AtlasTexture_jif4j"]
 atlas = ExtResource("3_hjlgj")
 region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_348m8"]
+atlas = ExtResource("4_kebts")
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_65t7r"]
 atlas = ExtResource("2_ra6pv")
@@ -48,6 +56,14 @@ animations = [{
 "loop": true,
 "name": &"alarmed",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_348m8")
+}],
+"loop": true,
+"name": &"empty_anim",
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.5,
@@ -159,7 +175,125 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Animation" id="Animation_brjvb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lw510"]
+resource_name = "hit"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.436332, -0.436332, 0.436332, -0.174533, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2, 0.25),
+"transitions": PackedFloat32Array(1e+06, 106.7, 1e+06, 1),
+"update": 0,
+"values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1), Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rs3os"]
+_data = {
+"RESET": SubResource("Animation_brjvb"),
+"hit": SubResource("Animation_lw510")
+}
+
+[sub_resource type="Curve" id="Curve_xpfov"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jhedb"]
+colors = PackedColorArray(0.133333, 0.141176, 0.258824, 1, 0, 0, 0, 1)
+
 [node name="Corrupted_Goat" type="CharacterBody2D"]
+collision_layer = 0
 script = ExtResource("1_as4dr")
 boundary = 750.0
 
@@ -168,13 +302,19 @@ boundary = 750.0
 [node name="CollisionShape2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_plqom")
 
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ol8rd")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_bdsuo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_agkde")
-animation = &"alarmed"
+animation = &"idle"
 
 [node name="MarkAnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
@@ -184,7 +324,38 @@ animation = &"empty_anim"
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rs3os")
+}
+autoplay = "RESET"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_ialhp")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 6
+lifetime = 0.4
+one_shot = true
+preprocess = 0.03
+explosiveness = 0.85
+randomness = 0.6
+emission_shape = 1
+emission_sphere_radius = 0.1
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.0
+initial_velocity_max = 70.0
+scale_amount_min = 40.0
+scale_amount_max = 40.0
+scale_amount_curve = SubResource("Curve_xpfov")
+color_ramp = SubResource("Gradient_jhedb")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]
 [connection signal="animation_looped" from="MarkAnimatedSprite2D" to="." method="_on_mark_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -4,10 +4,17 @@ extends CharacterBody2D
 
 # references
 @onready var player = get_node("/root/Game/Player")
-@onready var anim = $AnimatedSprite2D
+@onready var animated_sprite = $AnimatedSprite2D
 @onready var mark_anim = $MarkAnimatedSprite2D
+
+# we use AnimationPlayer because it can modify node properties,
+# for example we access the Sprite2D's rotation and modulate (color)
+# properties to make the animation "hit"
+@onready var animation_player = $AnimationPlayer
+@onready var sprite2D = $Sprite2D
+@onready var hit_particles = $CPUParticles2D
  
-enum State { IDLE, ROAM, ALARMED, CHASE }
+enum State { IDLE, ROAM, ALARMED, CHASE, HIT }
 var current_state: State
 var direction: Vector2
 var can: bool = true
@@ -28,20 +35,26 @@ var initial_position
 @export var boundary: float
 
 func _ready():
+	mark_anim.play("empty_anim")
 	current_state = State.IDLE
 	initial_position = position
-	mark_anim.play("empty_anim")
 
 func _physics_process(delta):
 	if !is_dead or is_possessed:
 		check_states(delta)
 	else:
 		pass # replace with die
+	
+	# ===============< JUST FOR TESTING >===============
+	# yes, chicken and goat will chase you even if far away when press E
+	# you'd want them to chase you if you hit a ranged attack for example
+	if Input.is_action_just_pressed("interact"):
+		current_state = State.HIT
 
 func check_states(delta):
 	match current_state:
 		State.IDLE:
-			anim.play("idle")
+			animated_sprite.play("idle")
 			mark_anim.play("empty_anim")
 			attention_time = 0
 			
@@ -53,7 +66,7 @@ func check_states(delta):
 				$Timer.start(time)
 
 		State.ROAM:
-			anim.play("walk")
+			animated_sprite.play("walk")
 			mark_anim.play("empty_anim")
 			roam()
 			
@@ -66,7 +79,7 @@ func check_states(delta):
 				$Timer.start(time)
 
 		State.ALARMED:
-			anim.play("alarmed")
+			animated_sprite.play("alarmed")
 			mark_anim.play("question")
 			
 			# add time passed to attention_time
@@ -77,18 +90,25 @@ func check_states(delta):
 				current_state = State.CHASE
 
 		State.CHASE:
-			anim.play("walk")
+			#animated_sprite.visible = true
+			animated_sprite.play("walk")
 			
 			if mark_anim.animation != "empty_anim":
 				mark_anim.play("exclamation")
 				
 			chase()
 
+		State.HIT:
+			take_damage(0)
+			check_flip()
+
 func check_flip():
 	if direction.x < 0:
-		anim.flip_h = true
+		animated_sprite.flip_h = true
+		sprite2D.flip_h = true
 	elif direction.x > 0:
-		anim.flip_h = false
+		animated_sprite.flip_h = false
+		sprite2D.flip_h = false
 
 func roam():
 	# check boundaries, e.g. initial_position is (0, 0) and boundary is 50:
@@ -121,6 +141,12 @@ func randomize_direction():
 		direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 		check_flip()
 
+func take_damage(_amount: int):
+	#animated_sprite.visible = false
+	animation_player.play("hit")
+	
+
+# ==============< SIGNALS >===============
 func _on_timer_timeout():
 	# it means our current state's started $Timer expired
 	# meaning we spent 1, 2 or 3 seconds on that state, so we change it
@@ -134,16 +160,31 @@ func _on_timer_timeout():
 	# because if we didn't, it'd restart $Timer infinitely 
 	can = true
 
+# use animation_looped signal because animation_finished wasn't firing
+func _on_mark_animated_sprite_2d_animation_looped():
+	if mark_anim.animation == "question" or mark_anim.animation == "exclamation":
+		mark_anim.play("empty_anim")
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "hit":
+		current_state = State.CHASE
+
+# ===============< COLLISIONS >===============
+
+# =====< Area2D collisions >=====
 func _on_area_2d_body_entered(body):
 	if body is Player:
-		current_state = State.ALARMED
+		if current_state != State.CHASE:
+			current_state = State.ALARMED
 
 func _on_area_2d_body_exited(body):
 	if body is Player:
 		current_state = State.IDLE
 
-# use animation_looped signal because animation_finished wasn't firing
-func _on_mark_animated_sprite_2d_animation_looped():
-	if mark_anim.animation == "question" or mark_anim.animation == "exclamation":
-		mark_anim.play("empty_anim")
-		print("looped")
+# =====< HitArea collisions >=====
+func _on_hit_area_body_entered(body):
+	if body is Player:
+		body.take_damage(0)
+
+func _on_hit_area_body_exited(_body):
+	pass # Replace with function body.

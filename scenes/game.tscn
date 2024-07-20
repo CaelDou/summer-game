@@ -468,6 +468,10 @@ vein_type = 3
 position = Vector2(-622, -502)
 collision_mask = 0
 
+[node name="CorruptedGoat" parent="." instance=ExtResource("11_3vuvj")]
+position = Vector2(881, -713)
+scale = Vector2(10, 10)
+
 [node name="Player" parent="." instance=ExtResource("1_mgs8s")]
 position = Vector2(-1, 60)
 collision_layer = 1
@@ -485,11 +489,8 @@ position_smoothing_enabled = true
 [node name="Interface" parent="CanvasLayer" instance=ExtResource("7_rgnyr")]
 script = ExtResource("8_dw4rq")
 
-[node name="CorruptedGoat" parent="." instance=ExtResource("11_3vuvj")]
-position = Vector2(-384, 229)
-scale = Vector2(10, 10)
-
 [connection signal="body_entered" from="NigredoVein" to="GameManager" method="_on_nigredo_vein_body_entered"]
 
+[editable path="Corrupted_Chicken"]
 [editable path="CanvasLayer/Interface"]
 [editable path="CanvasLayer/Interface/ResourcePanel"]

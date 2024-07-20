@@ -6,6 +6,14 @@ const Player = preload("res://scripts/player.gd")
 # reference to the AnimatedSprite2D node
 @onready var anim = $AnimatedSprite2D
 
+# =====< stats >=====
+@export var health: int = 10
+
+# thinking: when we call enemy's take_damage(amount),
+# we pass the sum of weapon held damage + base_damage to amount?
+# if not than we can just rename it to damage
+@export var base_damage: int = 1 
+
 # =====< movement >=====
 @export var speed: float = 200 # max speed
 @export var accel: float = 10  # how quickly the player get to max speed
@@ -49,3 +57,9 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
+
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		pass # replace with die
+		
