@@ -14,7 +14,7 @@ var held_weapon = null
 
 # =====< stats >=====
 @export var health: int = 10
-@export var base_damage: int = 1 
+@export var base_damage: int = 0
 @export var speed: float = 300 # max speed
 
 @export var accel: float = 10  # how quickly the player get to max speed

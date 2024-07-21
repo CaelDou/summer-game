@@ -22,7 +22,7 @@ func _process(_delta):
 		else:
 			z_index = 0
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	look_at(get_global_mouse_position())
 
 func get_weapon_sprite():

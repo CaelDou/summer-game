@@ -26,7 +26,6 @@ radius = 9.48683
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 0
-collision_mask = 2
 script = ExtResource("1_b06q8")
 
 [node name="HitArea" type="Area2D" parent="."]
@@ -41,7 +40,6 @@ scale = Vector2(9, 9)
 sprite_frames = SubResource("SpriteFrames_p8b5h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_liq62")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

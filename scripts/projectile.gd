@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
-@export var damage: float = 0
 @export var speed: float = 500
 
 var direction: Vector2 = Vector2.ZERO
@@ -19,6 +18,5 @@ func _physics_process(delta):
 
 func _on_hit_area_body_entered(body):
 	if body is Enemy:
-		body.take_damage(damage)
-		print(body.current_state)
+		body.take_damage(GameManager.current_damage)
 	queue_free()

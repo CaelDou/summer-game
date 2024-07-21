@@ -29,9 +29,6 @@ var can: bool = true
 @export var attention: float = 2.0 # how long enemy stays on State.ALARMED
 var attention_time: float = 0 # track time that passed
 
-@export var invulnerability: float = 0.5 # invulnerability time after hit, hit anim is 0.24s
-var invul_time: float = 0 # track time that passed
-
 var is_dead = false
 var is_possessed = false # works as a second life if ghost possesses
 
@@ -141,11 +138,20 @@ func randomize_direction():
 		direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 		check_flip()
 
-func take_damage(_delta, _amount: int):
+func take_damage(amount: int):
 	animation_player.play("hit")
 	# get angle to player and invert it so particles play opposite to player
 	var angle_to_player = (player.position - position).angle()
 	hit_particles.rotation = angle_to_player + PI
+	
+	health -= amount
+	if health <= 0:
+		die()
+
+func die():
+	animation_player.play("death")
+	is_dead = true
+	# instantiate corpe for ghost
 
 # ==============< SIGNALS >===============
 func _on_timer_timeout():
