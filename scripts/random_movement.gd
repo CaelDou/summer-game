@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Enemy
 
 # =====< FEEL FREE TO DELETE/ADD COMMENTS >=====
 
@@ -14,19 +15,23 @@ extends CharacterBody2D
 @onready var sprite2D = $Sprite2D
 @onready var hit_particles = $CPUParticles2D
  
-enum State { IDLE, ROAM, ALARMED, CHASE, HIT }
+# hit turned to stagger
+enum State { IDLE, ROAM, ALARMED, CHASE, STAGGER }
 var current_state: State
 var direction: Vector2
 var can: bool = true
 
 # stats
 @export var health: int = 2
-@export var damage: int = 1
+@export var damage: int = 0
 @export var speed: float = 150.0
+
 @export var attention: float = 2.0 # how long enemy stays on State.ALARMED
 var attention_time: float = 0 # track time that passed
 
-# bool
+@export var invulnerability: float = 0.5 # invulnerability time after hit, hit anim is 0.24s
+var invul_time: float = 0 # track time that passed
+
 var is_dead = false
 var is_possessed = false # works as a second life if ghost possesses
 
@@ -44,12 +49,6 @@ func _physics_process(delta):
 		check_states(delta)
 	else:
 		pass # replace with die
-	
-	# ===============< JUST FOR TESTING >===============
-	# yes, chicken and goat will chase you even if far away when press E
-	# you'd want them to chase you if you hit a ranged attack for example
-	if Input.is_action_just_pressed("interact"):
-		current_state = State.HIT
 
 func check_states(delta):
 	match current_state:
@@ -90,7 +89,6 @@ func check_states(delta):
 				current_state = State.CHASE
 
 		State.CHASE:
-			#animated_sprite.visible = true
 			animated_sprite.play("walk")
 			
 			if mark_anim.animation != "empty_anim":
@@ -98,9 +96,11 @@ func check_states(delta):
 				
 			chase()
 
-		State.HIT:
-			take_damage(0)
+		State.STAGGER:
+			animation_player.play("stagger")
 			check_flip()
+			current_state = State.CHASE
+			# returns to State.CHASE through _on_animation_player_animation_finished()
 
 func check_flip():
 	if direction.x < 0:
@@ -141,10 +141,11 @@ func randomize_direction():
 		direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 		check_flip()
 
-func take_damage(_amount: int):
-	#animated_sprite.visible = false
+func take_damage(_delta, _amount: int):
 	animation_player.play("hit")
-	
+	# get angle to player and invert it so particles play opposite to player
+	var angle_to_player = (player.position - position).angle()
+	hit_particles.rotation = angle_to_player + PI
 
 # ==============< SIGNALS >===============
 func _on_timer_timeout():
@@ -184,7 +185,7 @@ func _on_area_2d_body_exited(body):
 # =====< HitArea collisions >=====
 func _on_hit_area_body_entered(body):
 	if body is Player:
-		body.take_damage(0)
+		body.take_damage(damage)
 
 func _on_hit_area_body_exited(_body):
 	pass # Replace with function body.

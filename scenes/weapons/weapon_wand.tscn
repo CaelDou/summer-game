@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxdnhwdwb6vle"]
+
+[ext_resource type="Texture2D" uid="uid://ctekkyisb6vbc" path="res://art/icon.svg" id="1_3u6ov"]
+[ext_resource type="Script" path="res://scripts/weapon_wand.gd" id="2_cbi3e"]
+
+[node name="Weapon_Wand" type="Sprite2D"]
+position = Vector2(181, 0)
+texture = ExtResource("1_3u6ov")
+script = ExtResource("2_cbi3e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

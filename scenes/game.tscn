@@ -436,6 +436,7 @@ top_level = true
 color = Color(0.321728, 0.321728, 0.321728, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 scale = Vector2(10, 10)
 tile_set = SubResource("TileSet_ftxwq")
 format = 2
@@ -476,8 +477,6 @@ scale = Vector2(10, 10)
 position = Vector2(-1, 60)
 collision_layer = 1
 motion_mode = 1
-speed = 300.0
-accel = 30.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -60)
@@ -492,5 +491,6 @@ script = ExtResource("8_dw4rq")
 [connection signal="body_entered" from="NigredoVein" to="GameManager" method="_on_nigredo_vein_body_entered"]
 
 [editable path="Corrupted_Chicken"]
+[editable path="Player"]
 [editable path="CanvasLayer/Interface"]
 [editable path="CanvasLayer/Interface/ResourcePanel"]

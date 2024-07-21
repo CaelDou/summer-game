@@ -1,11 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://dhd5tae517tdq"]
+[gd_scene load_steps=39 format=3 uid="uid://dhd5tae517tdq"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ro3cy"]
 [ext_resource type="Texture2D" uid="uid://5q73d77b2w0p" path="res://art/player_idle_placeholder.png" id="2_cy44e"]
 [ext_resource type="Texture2D" uid="uid://rw4tv8msbm7q" path="res://art/player_walk_placeholder.png" id="3_lb307"]
 [ext_resource type="Texture2D" uid="uid://dqcorwbp26jgc" path="res://art/light.png" id="4_kwrec"]
-[ext_resource type="Script" path="res://scripts/weapon_holder.gd" id="5_ts0cg"]
-[ext_resource type="PackedScene" uid="uid://bxdnhwdwb6vle" path="res://scenes/weapons/weapon_wand.tscn" id="6_e43dj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2fgx7"]
 radius = 40.3113
@@ -296,10 +294,3 @@ energy = 1.56
 shadow_enabled = true
 texture = ExtResource("4_kwrec")
 texture_scale = 3.0
-
-[node name="WeaponHolder" type="Marker2D" parent="."]
-position = Vector2(0, 5.96046e-08)
-scale = Vector2(0.405772, 0.36)
-script = ExtResource("5_ts0cg")
-
-[node name="Weapon_Wand" parent="WeaponHolder" instance=ExtResource("6_e43dj")]

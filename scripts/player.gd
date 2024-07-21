@@ -3,19 +3,20 @@ class_name Player
 
 const Player = preload("res://scripts/player.gd")
 
-# reference to the AnimatedSprite2D node
+# =====< references >=====
+@onready var game = get_tree().get_root().get_node("Game")
 @onready var anim = $AnimatedSprite2D
+@onready var weapon_holder = $WeaponHolder
+var held_weapon = null
+
+# to test if get and update held_weapon work
+@onready var weapon_wand = load("res://scenes/weapons/weapon_wand.tscn")
 
 # =====< stats >=====
 @export var health: int = 10
-
-# thinking: when we call enemy's take_damage(amount),
-# we pass the sum of weapon held damage + base_damage to amount?
-# if not than we can just rename it to damage
 @export var base_damage: int = 1 
+@export var speed: float = 300 # max speed
 
-# =====< movement >=====
-@export var speed: float = 200 # max speed
 @export var accel: float = 10  # how quickly the player get to max speed
 var direction: Vector2 = Vector2.ZERO
 var last_direction: Vector2 = Vector2.ZERO
@@ -43,6 +44,16 @@ func _process(_delta):
 		anim.play("idle_" + direction_anim[last_direction])
 	else:
 		anim.play("walk_" + direction_anim[direction])
+	
+	if held_weapon != null:
+		GameManager.current_damage = base_damage + held_weapon.damage
+	else:
+		GameManager.current_damage = base_damage
+	
+	# everywhere you call update_held_weapon, you have to instantiate
+	# the new_weapon as in update_held_weapon(new_weapon.instantiate())
+	if Input.is_action_just_pressed("m1"):
+		update_held_weapon(weapon_wand.instantiate())
 
 func _physics_process(_delta):
 	# get the input direction in a Vector2, so left would be (-1, 0)
@@ -51,7 +62,6 @@ func _physics_process(_delta):
 	
 	# handle movement
 	if direction != Vector2.ZERO:
-		# normalize so the player doesn't go faster diagonally
 		velocity = direction.normalized() * speed
 	else:
 		velocity = Vector2.ZERO
@@ -62,4 +72,20 @@ func take_damage(amount: int):
 	health -= amount
 	if health <= 0:
 		pass # replace with die
-		
+
+func get_held_weapon():
+	if weapon_holder.get_child_count() > 0:
+		held_weapon = weapon_holder.get_child(0)
+	else:
+		held_weapon = null
+
+# this could be connected to a signal 
+# removes held_weapon from weapon_holder and adds parameter to it
+# HAVE TO INSTANTIATE new_weapon
+func update_held_weapon(new_weapon: Node):
+	if held_weapon != null:
+		weapon_holder.remove_child(held_weapon)
+	
+	held_weapon = new_weapon
+	weapon_holder.add_child(held_weapon)
+	weapon_holder.get_weapon_sprite()

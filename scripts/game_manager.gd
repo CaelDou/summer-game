@@ -1,5 +1,8 @@
 extends Node2D
 
+# comes from player, who calculates its dmg + its held weapon dmg
+var current_damage: int
+
 enum VeinType { NIGREDO, CITRINITAS, ALBEDO, RUBEDO }
 
 var nigredo_count = 0
