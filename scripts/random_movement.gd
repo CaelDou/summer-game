@@ -4,7 +4,9 @@ class_name NigredoEnemy
 # =====< FEEL FREE TO DELETE/ADD COMMENTS >=====
 
 # references
+@onready var game = get_tree().get_root().get_node("Game")
 @onready var player = get_node("/root/Game/Player")
+@onready var damage_label = load("res://scenes/interface/damage_label.tscn")
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var mark_anim = $MarkAnimatedSprite2D
 
@@ -28,11 +30,10 @@ var can: bool = true
 @export var health: int
 @export var damage: int
 @export var speed: float
-
+@export var attention: float = 2.0 # how long enemy stays on State.ALARMED
 @export var poise: int # how many stagger they need before entering STAGGER
 var stagger: int = 0 # track stagger received
 
-@export var attention: float = 2.0 # how long enemy stays on State.ALARMED
 var attention_time: float = 0 # track time that passed
 
 var is_dead = false
@@ -179,6 +180,11 @@ func take_damage(dmg_amount: int, stg_amount: int): # stagger_amount
 	
 	stagger += stg_amount
 	health -= dmg_amount
+	
+	var label = damage_label.instantiate()
+	game.add_child(label)
+	label.pos = global_position + Vector2(0, -50)
+	label.set_spawn_position(global_position + Vector2(0, -50))
 	
 	if health <= 0:
 		die()

@@ -7,6 +7,21 @@
 radius = 8.95238
 height = 38.8909
 
+[sub_resource type="Animation" id="Animation_1q2h3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/Area2D:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_7b27h"]
 resource_name = "slash"
 length = 0.5
@@ -14,53 +29,26 @@ step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
+tracks/0/path = NodePath("Sprite2D/Area2D:monitoring")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.16, 0.24, 0.28, 0.38, 0.44, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-1.0472, 2.44346, 1.74533, 1.5708, 1.22173, 1.0472, 0.785398]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:monitoring")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.24),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-
-[sub_resource type="Animation" id="Animation_1q2h3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.785398]
-}
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:monitoring")
+tracks/1/path = NodePath("Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.03, 0.16, 0.24, 0.28, 0.38, 0.44, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.785398, -1.0472, 2.35619, 1.74533, 1.5708, 1.22173, 1.0472, 0.785398]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c13hq"]
@@ -69,20 +57,25 @@ _data = {
 "slash": SubResource("Animation_7b27h")
 }
 
-[node name="Sprite2D" type="Sprite2D"]
-position = Vector2(0, -1)
-rotation = 0.785398
+[node name="Weapon_Sword" type="Marker2D"]
+position = Vector2(90, 0)
 scale = Vector2(12, 12)
-texture = ExtResource("1_4muqo")
-offset = Vector2(9, -9)
 script = ExtResource("2_uh0xu")
+weapon_scale = 12.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 0.000651284)
+rotation = 0.785398
+texture = ExtResource("1_4muqo")
+offset = Vector2(9.95796, -9.95888)
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(-0.000459857, -0.000461191)
 collision_layer = 0
 collision_mask = 2
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 position = Vector2(14.504, -14.7461)
 rotation = 0.785398
 shape = SubResource("CapsuleShape2D_xru2c")
@@ -96,6 +89,7 @@ libraries = {
 }
 autoplay = "RESET"
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
