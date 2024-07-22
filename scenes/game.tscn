@@ -615,6 +615,7 @@ motion_mode = 1
 
 [node name="PointLight2D" parent="Player" index="2"]
 position = Vector2(0, 1)
+energy = 1.56
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -60)

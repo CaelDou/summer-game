@@ -149,7 +149,6 @@ func chase():
 
 func flee():
 	if target:
-		var flee_distance = position.distance_to(target.position)
 		direction = (position - target.position).normalized()
 		check_flip()
 		

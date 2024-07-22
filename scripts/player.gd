@@ -11,6 +11,7 @@ var held_weapon = null
 
 # to test if get and update held_weapon work
 @onready var weapon_wand = load("res://scenes/weapons/weapon_wand.tscn")
+@onready var weapon_sword = load("res://scenes/weapons/weapon_sword.tscn")
 
 # =====< stats >=====
 @export var health: int = 10
@@ -38,7 +39,10 @@ var direction_anim = {
 func _ready():
 	print("=====< just for testing >=====")
 	print("CTRL -> Wield wand")
-	print("MOUSE 1 -> Use wand")
+	print("LEFT SHIFT -> Wield sword")
+	print("MOUSE 1 -> Use item")
+	print("\n******************************\nAlso, yes, sword looks awful when looking left")
+	print("have to figure out how to properly flip it\n******************************\n")
 
 func _process(_delta):
 	# update last_direction until the player stops
@@ -62,6 +66,8 @@ func _process(_delta):
 	# the new_weapon as in update_held_weapon(new_weapon.instantiate())
 	if Input.is_action_just_pressed("ctrl"):
 		update_held_weapon(weapon_wand.instantiate())
+	if Input.is_action_just_pressed("shift"):
+		update_held_weapon(weapon_sword.instantiate())
 
 func _physics_process(_delta):
 	# get the input direction in a Vector2, so left would be (-1, 0)
