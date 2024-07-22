@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://dj3bwnbp1re3u"]
+
+[ext_resource type="Texture2D" uid="uid://ck6dsvigtoepa" path="res://art/_citrinitas_still.png" id="1_mv073"]
+[ext_resource type="Texture2D" uid="uid://dqcorwbp26jgc" path="res://art/light.png" id="3_djwxm"]
+
+[sub_resource type="GDScript" id="GDScript_urmjb"]
+script/source = "extends Sprite2D
+
+# manipulate light radius for upgrades
+@onready var point_light = $PointLight2D
+
+func _on_area_2d_body_entered(body):
+	if body is NigredoEnemy:
+		body.flee_from(self)
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7ibb8"]
+radius = 47.0106
+
+[node name="Torch" type="Sprite2D"]
+scale = Vector2(9, 9)
+texture = ExtResource("1_mv073")
+script = SubResource("GDScript_urmjb")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7ibb8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1.49012e-08, -2.98023e-08)
+scale = Vector2(0.0638202, 0.0628074)
+color = Color(0.996078, 0.819608, 0.662745, 1)
+range_z_min = -25
+range_z_max = 25
+shadow_enabled = true
+texture = ExtResource("3_djwxm")
+texture_scale = 3.0
+height = 16.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

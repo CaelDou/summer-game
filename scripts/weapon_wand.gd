@@ -4,9 +4,10 @@ extends Sprite2D
 @onready var projectile = load("res://scenes/projectiles/test.tscn")
 
 @export var damage: int = 1
+@export var stagger: int = 1
 
 func _process(_delta):
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("m1"):
 		shoot()
 
 func shoot():

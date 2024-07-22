@@ -15,6 +15,7 @@ var held_weapon = null
 # =====< stats >=====
 @export var health: int = 10
 @export var base_damage: int = 0
+@export var base_stagger: int = 0
 @export var speed: float = 300 # max speed
 
 @export var accel: float = 10  # how quickly the player get to max speed
@@ -34,6 +35,11 @@ var direction_anim = {
 	Vector2(-1, -1): "left"
 }
 
+func _ready():
+	print("=====< just for testing >=====")
+	print("CTRL -> Wield wand")
+	print("MOUSE 1 -> Use wand")
+
 func _process(_delta):
 	# update last_direction until the player stops
 	if direction != Vector2.ZERO:
@@ -47,12 +53,14 @@ func _process(_delta):
 	
 	if held_weapon != null:
 		GameManager.current_damage = base_damage + held_weapon.damage
+		GameManager.current_stagger = base_stagger + held_weapon.stagger
 	else:
 		GameManager.current_damage = base_damage
+		GameManager.current_stagger = base_stagger
 	
 	# everywhere you call update_held_weapon, you have to instantiate
 	# the new_weapon as in update_held_weapon(new_weapon.instantiate())
-	if Input.is_action_just_pressed("m1"):
+	if Input.is_action_just_pressed("ctrl"):
 		update_held_weapon(weapon_wand.instantiate())
 
 func _physics_process(_delta):

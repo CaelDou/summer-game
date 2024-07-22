@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Enemy
+class_name NigredoEnemy
 
 # =====< FEEL FREE TO DELETE/ADD COMMENTS >=====
 
@@ -15,16 +15,22 @@ class_name Enemy
 @onready var sprite2D = $Sprite2D
 @onready var hit_particles = $CPUParticles2D
  
-# hit turned to stagger
-enum State { IDLE, ROAM, ALARMED, CHASE, STAGGER }
+@onready var navigation_agent = $NavigationAgent2D
+var target: Node2D = null
+
+# FLEE is flee from light sources
+enum State { IDLE, ROAM, ALARMED, CHASE, STAGGER, FLEE }
 var current_state: State
 var direction: Vector2
 var can: bool = true
 
 # stats
-@export var health: int = 2
-@export var damage: int = 0
-@export var speed: float = 150.0
+@export var health: int
+@export var damage: int
+@export var speed: float
+
+@export var poise: int # how many stagger they need before entering STAGGER
+var stagger: int = 0 # track stagger received
 
 @export var attention: float = 2.0 # how long enemy stays on State.ALARMED
 var attention_time: float = 0 # track time that passed
@@ -87,17 +93,24 @@ func check_states(delta):
 
 		State.CHASE:
 			animated_sprite.play("walk")
-			
 			if mark_anim.animation != "empty_anim":
 				mark_anim.play("exclamation")
-				
+			
+			# call it a bit later
+			#call_deferred("chase")
 			chase()
 
 		State.STAGGER:
+			mark_anim.play("empty_anim")
 			animation_player.play("stagger")
 			check_flip()
-			current_state = State.CHASE
+			stagger = 0
 			# returns to State.CHASE through _on_animation_player_animation_finished()
+
+		State.FLEE:
+			mark_anim.play("exclamation")
+			flee()
+	#print(current_state)
 
 func check_flip():
 	if direction.x < 0:
@@ -119,14 +132,34 @@ func roam():
 	velocity = direction * speed
 	move_and_slide()
 
-# basic move to player position motion, will get stuck at walls
-# will make a better pathing later
 func chase():
-	direction = (player.position - position).normalized()
+	if navigation_agent.is_navigation_finished():
+		pass
+		# make them attack
+		# problem is that they never get inside the player, so it never finishes
+	
+	target = player
+	navigation_agent.target_position = target.position
+	
+	direction = (navigation_agent.get_next_path_position() - position).normalized()
 	check_flip()
 	
 	velocity = direction * speed
 	move_and_slide()
+
+func flee():
+	if target:
+		var flee_distance = position.distance_to(target.position)
+		direction = (position - target.position).normalized()
+		check_flip()
+		
+		velocity = direction * speed
+		move_and_slide()
+
+# this is just to get the light source position
+func flee_from(light_source_node: Node2D):
+	target = light_source_node
+	current_state = State.FLEE
 
 func randomize_direction():
 	# reset direction so it always enters the while
@@ -138,15 +171,24 @@ func randomize_direction():
 		direction = Vector2(randi_range(-1, 1), randi_range(-1, 1)).normalized()
 		check_flip()
 
-func take_damage(amount: int):
-	animation_player.play("hit")
+func take_damage(dmg_amount: int, stg_amount: int): # stagger_amount
+	if current_state != State.STAGGER:
+		animation_player.play("hit")
 	# get angle to player and invert it so particles play opposite to player
 	var angle_to_player = (player.position - position).angle()
 	hit_particles.rotation = angle_to_player + PI
 	
-	health -= amount
+	stagger += stg_amount
+	health -= dmg_amount
+	
 	if health <= 0:
 		die()
+	elif stagger >= poise:
+		stagger = 0
+		if current_state != State.STAGGER:
+			current_state = State.STAGGER
+	
+	$Timer.start(2) # if expires, stagger is reset
 
 func die():
 	animation_player.play("death")
@@ -162,10 +204,8 @@ func _on_timer_timeout():
 			current_state = State.ROAM
 		State.ROAM:
 			current_state = State.IDLE
-	
-	# also we want to reset 'can' to true only when the $Timer expires
-	# because if we didn't, it'd restart $Timer infinitely 
 	can = true
+	stagger = 0
 
 # use animation_looped signal because animation_finished wasn't firing
 func _on_mark_animated_sprite_2d_animation_looped():
@@ -175,13 +215,15 @@ func _on_mark_animated_sprite_2d_animation_looped():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hit":
 		current_state = State.CHASE
+	elif anim_name == "stagger":
+		current_state = State.CHASE
 
 # ===============< COLLISIONS >===============
 
 # =====< Area2D collisions >=====
 func _on_area_2d_body_entered(body):
 	if body is Player:
-		if current_state != State.CHASE:
+		if current_state != State.CHASE and current_state != State.STAGGER:
 			current_state = State.ALARMED
 
 func _on_area_2d_body_exited(body):
@@ -192,6 +234,3 @@ func _on_area_2d_body_exited(body):
 func _on_hit_area_body_entered(body):
 	if body is Player:
 		body.take_damage(damage)
-
-func _on_hit_area_body_exited(_body):
-	pass # Replace with function body.

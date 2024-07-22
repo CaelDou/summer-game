@@ -1,7 +1,8 @@
 extends Node2D
 
-# comes from player, who calculates its dmg + its held weapon dmg
+# comes from player, who calculates its base + its held weapon stat
 var current_damage: int
+var current_stagger: int
 
 enum VeinType { NIGREDO, CITRINITAS, ALBEDO, RUBEDO }
 

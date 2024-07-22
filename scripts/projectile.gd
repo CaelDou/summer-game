@@ -17,6 +17,6 @@ func _physics_process(delta):
 	position += direction * speed * delta
 
 func _on_hit_area_body_entered(body):
-	if body is Enemy:
-		body.take_damage(GameManager.current_damage)
+	if body is 	NigredoEnemy:
+		body.take_damage(GameManager.current_damage, GameManager.current_stagger)
 	queue_free()
