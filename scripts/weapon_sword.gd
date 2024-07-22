@@ -38,5 +38,5 @@ func _on_animation_player_animation_finished(anim_name):
 		animation_player.play("RESET")
 
 func _on_area_2d_area_entered(area):
-	if area.owner is NigredoEnemy and area.name == "HitArea":
+	if area.owner is NigredoEnemy and area.name == "HurtArea":
 		area.owner.take_damage(GameManager.current_damage, GameManager.current_stagger)

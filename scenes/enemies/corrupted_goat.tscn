@@ -252,7 +252,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HitArea:monitoring")
+tracks/6/path = NodePath("HurtArea:monitoring")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -264,7 +264,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("HitArea:monitorable")
+tracks/7/path = NodePath("HurtArea:monitorable")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -353,7 +353,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HitArea:monitorable")
+tracks/6/path = NodePath("HurtArea:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -418,7 +418,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HitArea:monitorable")
+tracks/4/path = NodePath("HurtArea:monitorable")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -430,7 +430,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HitArea:monitoring")
+tracks/5/path = NodePath("HurtArea:monitoring")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -519,7 +519,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HitArea:monitorable")
+tracks/6/path = NodePath("HurtArea:monitorable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -560,11 +560,11 @@ collision_mask = 2
 [node name="CollisionShape2" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_plqom")
 
-[node name="HitArea" type="Area2D" parent="."]
+[node name="HurtArea" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_ol8rd")
 
@@ -618,8 +618,8 @@ debug_enabled = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
-[connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]
+[connection signal="body_entered" from="HurtArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_exited" from="HurtArea" to="." method="_on_hit_area_body_exited"]
 [connection signal="animation_looped" from="MarkAnimatedSprite2D" to="." method="_on_mark_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

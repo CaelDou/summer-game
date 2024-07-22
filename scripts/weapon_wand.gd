@@ -5,12 +5,18 @@ extends Sprite2D
 
 @export var damage: int = 1
 @export var stagger: int = 1
+@export var cooldown: float = 0.5
+var time_passed: float = 0.0
 
-func _process(_delta):
+func _process(delta):
+	time_passed += delta
+	
 	if Input.is_action_just_pressed("m1"):
-		shoot()
+		if time_passed >= cooldown:
+			shoot()
 
 func shoot():
+	time_passed = 0
 	var instance = projectile.instantiate()
 	var mouse_position = get_global_mouse_position()
 	var direction_to_mouse = (mouse_position - global_position).normalized()

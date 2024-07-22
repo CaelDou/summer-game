@@ -16,7 +16,10 @@ func _process(delta):
 func _physics_process(delta):
 	position += direction * speed * delta
 
+func _on_hit_area_area_entered(area):
+	if area.owner is NigredoEnemy and area.name == "HurtArea":
+		area.owner.take_damage(GameManager.current_damage, GameManager.current_stagger)
+		queue_free()
+
 func _on_hit_area_body_entered(body):
-	if body is 	NigredoEnemy:
-		body.take_damage(GameManager.current_damage, GameManager.current_stagger)
 	queue_free()
