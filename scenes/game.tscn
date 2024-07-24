@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ek44v0h3ij6f"]
+[gd_scene load_steps=35 format=3 uid="uid://ek44v0h3ij6f"]
 
 [ext_resource type="PackedScene" uid="uid://c22v4aqfvr7uu" path="res://scenes/game_manager.tscn" id="1_avxpm"]
 [ext_resource type="PackedScene" uid="uid://dhd5tae517tdq" path="res://scenes/player.tscn" id="1_mgs8s"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bc6khg0mihgsr" path="res://scenes/enemies/corrupted_goat.tscn" id="11_3vuvj"]
 [ext_resource type="PackedScene" uid="uid://b8sqyhwlaxdd2" path="res://scenes/Veins/citrinitas_vein.tscn" id="11_4k7uy"]
 [ext_resource type="PackedScene" uid="uid://dj3bwnbp1re3u" path="res://scenes/torch.tscn" id="12_1uf6q"]
+[ext_resource type="PackedScene" uid="uid://c6c5wf1tbs1t1" path="res://scenes/enemies/ghost.tscn" id="13_yvp1f"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_w07td"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -619,7 +620,7 @@ energy = 1.56
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -60)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.7, 0.7)
 position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -629,6 +630,9 @@ script = ExtResource("8_dw4rq")
 
 [node name="Torch" parent="." instance=ExtResource("12_1uf6q")]
 position = Vector2(-677, 767)
+
+[node name="Ghost" parent="." instance=ExtResource("13_yvp1f")]
+position = Vector2(-933, -500)
 
 [connection signal="body_entered" from="NigredoVein" to="GameManager" method="_on_nigredo_vein_body_entered"]
 

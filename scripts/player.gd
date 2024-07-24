@@ -41,8 +41,6 @@ func _ready():
 	print("CTRL -> Wield wand")
 	print("LEFT SHIFT -> Wield sword")
 	print("MOUSE 1 -> Use item")
-	print("\n******************************\nAlso, yes, sword looks awful when looking left")
-	print("have to figure out how to properly flip it\n******************************\n")
 
 func _process(_delta):
 	# update last_direction until the player stops

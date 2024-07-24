@@ -12,8 +12,8 @@ var p2: Vector2
 
 var time: float = 0.0
 
-func _ready():
-	label.text = str(GameManager.current_damage)
+#func _ready():
+	#label.text = str(GameManager.current_damage)
 
 func _physics_process(delta):
 	time += delta
@@ -28,8 +28,10 @@ func bezier(t):
 	return r
 
 # I'm going insane
-func set_spawn_position(spawn_position):
+func set_info(spawn_position, damage):
 	pos = spawn_position
+	label.text = str("-", str(damage))
+	
 	p0 = pos
 	points_left = [Vector2(pos.x - 110, pos.y - 110), Vector2(pos.x - 180, pos.y)]
 	points_right = [Vector2(pos.x + 110, pos.y - 110), Vector2(pos.x + 180, pos.y)]

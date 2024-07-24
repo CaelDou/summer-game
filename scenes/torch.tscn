@@ -10,7 +10,7 @@ script/source = "extends Sprite2D
 @onready var point_light = $PointLight2D
 
 func _on_area_2d_body_entered(body):
-	if body is NigredoEnemy:
+	if body is NigredoEnemy or body is Ghost:
 		body.flee_from(self)
 "
 

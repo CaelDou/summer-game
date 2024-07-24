@@ -6,11 +6,10 @@
 [node name="Weapon_Wand" type="Marker2D"]
 position = Vector2(181, 0)
 script = ExtResource("2_cbi3e")
-weapon_scale = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-9.09495e-13, 1.78814e-07)
-scale = Vector2(9, 9)
+scale = Vector2(10, 10)
 texture = ExtResource("2_i8ptp")
 offset = Vector2(10, -10)
 
