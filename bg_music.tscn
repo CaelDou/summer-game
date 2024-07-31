@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://usdgq7wj74mk"]
+
+[ext_resource type="AudioStream" uid="uid://bd4x5v8a5jtoe" path="res://level theme.mp3" id="1_ynnlh"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_ynnlh")
+autoplay = true
