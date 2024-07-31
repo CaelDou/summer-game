@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bor1dvwaa58ay"
-path="res://.godot/imported/Icon31_07.png-6f496029b89d0e7e504fa21a082a328e.ctex"
+uid="uid://dbgnixtjiwtbg"
+path="res://.godot/imported/inventory_brackground.png-a58106d1b1577440427254d02a6b371d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Icon31_07.png"
-dest_files=["res://.godot/imported/Icon31_07.png-6f496029b89d0e7e504fa21a082a328e.ctex"]
+source_file="res://inventory/inventory_brackground.png"
+dest_files=["res://.godot/imported/inventory_brackground.png-a58106d1b1577440427254d02a6b371d.ctex"]
 
 [params]
 

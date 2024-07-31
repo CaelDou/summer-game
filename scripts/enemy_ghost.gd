@@ -208,6 +208,10 @@ func take_damage(dmg_amount: int, stg_amount: int): # stagger_amount
 func die():
 	animation_player.play("death")
 	is_dead = true
+	
+	var resource = randi_range(0, 3)
+	var amount = randi_range(5, 8)
+	GameManager.increase_ingredient(resource, amount)
 
 # ==============< SIGNALS >===============
 func _on_timer_timeout():

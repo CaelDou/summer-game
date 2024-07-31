@@ -711,6 +711,7 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_d754q")
 health = 25
+damage = 4
 speed = 200.0
 poise = 10
 boundary = 1000.0

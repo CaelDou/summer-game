@@ -1,12 +1,12 @@
 extends Marker2D
 
-var weapon_sprite = null
+var item_sprite = null
 
 func _ready():
-	get_weapon_sprite()
+	get_item_sprite()
 
 func _process(_delta):
-	get_weapon_sprite()
+	get_item_sprite()
 	if rotation > deg_to_rad(360) or rotation < deg_to_rad(-360):
 		rotation = deg_to_rad(0)
 	
@@ -18,8 +18,8 @@ func _process(_delta):
 func _physics_process(_delta):
 	look_at(get_global_mouse_position())
 
-func get_weapon_sprite():
-	weapon_sprite = null
+func get_item_sprite():
+	item_sprite = null
 	for child in get_children():
 		if child is Sprite2D:
-			weapon_sprite = child
+			item_sprite = child

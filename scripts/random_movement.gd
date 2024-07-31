@@ -234,7 +234,11 @@ func take_damage(dmg_amount: int, stg_amount: int): # stagger_amount
 func die():
 	animation_player.play("death")
 	is_dead = true
-
+	
+	var resource = randi_range(0, 3)
+	var amount = randi_range(1, 3)
+	GameManager.increase_ingredient(resource, amount)
+	
 func get_possessed(ghost_health, ghost_damage):
 	health = ghost_health
 	damage = ghost_damage

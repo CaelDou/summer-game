@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://s7piofs1kued"]
+
+[ext_resource type="Texture2D" uid="uid://ck6dsvigtoepa" path="res://art/_citrinitas_still.png" id="1_e1gw1"]
+[ext_resource type="Script" path="res://inventory/items/item.gd" id="2_rsk3a"]
+
+[resource]
+script = ExtResource("2_rsk3a")
+icon = ExtResource("1_e1gw1")
+name = "Citrinitas"
+recipe = Array[ExtResource("2_rsk3a")]([])
+type = "Resource"

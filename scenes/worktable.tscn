@@ -1,0 +1,143 @@
+[gd_scene load_steps=8 format=3 uid="uid://bljhwt41xrvb1"]
+
+[ext_resource type="Texture2D" uid="uid://cunpw0dajrllq" path="res://art/_worktable_level_1.png" id="1_4rlxb"]
+[ext_resource type="Script" path="res://scripts/worktable.gd" id="1_v6xms"]
+[ext_resource type="Texture2D" uid="uid://ipjv8rb4nels" path="res://art/_nigredo_animated.png" id="3_aqsjh"]
+[ext_resource type="Texture2D" uid="uid://ck6dsvigtoepa" path="res://art/_citrinitas_still.png" id="4_mvq22"]
+[ext_resource type="Texture2D" uid="uid://qum3sq4pixnh" path="res://art/_albedo_still.png" id="5_r7xsu"]
+[ext_resource type="Texture2D" uid="uid://6ijav2aaxvyj" path="res://art/_rubedo_still.png" id="6_dtewh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqhox"]
+radius = 204.414
+
+[node name="Worktable" type="Node2D"]
+script = ExtResource("1_v6xms")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hqhox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(9, 9)
+texture = ExtResource("1_4rlxb")
+
+[node name="LevelLabel" type="Label" parent="."]
+offset_left = -57.0
+offset_top = 71.0
+offset_right = 57.0
+offset_bottom = 134.0
+theme_override_font_sizes/font_size = 45
+text = "LVL 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = -193.0
+offset_top = -306.0
+offset_right = 193.0
+offset_bottom = -133.0
+action_mode = 0
+
+[node name="Control" type="Control" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = 1.0
+offset_right = -279.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.5, 3.5)
+
+[node name="Panel" type="Panel" parent="Button/Control"]
+layout_mode = 0
+offset_left = 2.28571
+offset_top = -1.14286
+offset_right = 113.286
+offset_bottom = 49.8571
+
+[node name="MarginContainer" type="MarginContainer" parent="Button/Control/Panel"]
+layout_mode = 0
+offset_right = 110.0
+offset_bottom = 51.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="GridContainer" type="GridContainer" parent="Button/Control/Panel/MarginContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_aqsjh")
+
+[node name="TextureRect2" type="TextureRect" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("4_mvq22")
+
+[node name="TextureRect3" type="TextureRect" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("5_r7xsu")
+
+[node name="TextureRect4" type="TextureRect" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+texture = ExtResource("6_dtewh")
+
+[node name="Label" type="Label" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.431373, 0.34902, 0.501961, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.913725, 0.592157, 0.219608, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.74902, 0.772549, 0.831373, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Button/Control/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.717647, 0.278431, 0.192157, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeLabel" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -73.0
+offset_right = 348.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 49
+text = "[E] UPGRADE"
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]

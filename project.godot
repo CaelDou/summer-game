@@ -11,25 +11,23 @@ config_version=5
 [application]
 
 config/name="summer game"
-run/main_scene="res://scenes/game.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://art/icon.svg"
 
 [autoload]
 
 GameManager="*res://scripts/game_manager.gd"
-
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+BackgroundMusic="*res://scenes/background_music.tscn"
 
 [file_customization]
 
 folder_colors={
 "res://art/": "red",
 "res://code/": "green",
-"res://scenes/": "teal"
+"res://inventory/": "orange",
+"res://scenes/": "yellow",
+"res://scripts/": "green"
 }
 
 [input]
@@ -72,6 +70,16 @@ ctrl={
 shift={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+enter={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+tab={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://jghj5myjkq1c"]
 
-[ext_resource type="Texture2D" uid="uid://bor1dvwaa58ay" path="res://art/Icon31_07.png" id="1_4muqo"]
+[ext_resource type="Texture2D" uid="uid://bor1dvwaa58ay" path="res://inventory/items/Icon31_07.png" id="1_4muqo"]
 [ext_resource type="Script" path="res://scripts/weapon_sword.gd" id="2_uh0xu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xru2c"]

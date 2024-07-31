@@ -14,7 +14,7 @@ radius = 59.7597
 radius = 5.45464
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gavq7"]
-radius = 123.891
+radius = 179.305
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ng82x"]
 radius = 5.44558
@@ -709,6 +709,7 @@ collision_layer = 7
 collision_mask = 2
 script = ExtResource("1_qou4f")
 health = 8
+damage = 1
 speed = 250.0
 attention = 1.0
 poise = 4
@@ -731,7 +732,6 @@ position = Vector2(1, 2)
 shape = SubResource("CircleShape2D_64u2s")
 
 [node name="CorpseArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 4
 monitoring = false

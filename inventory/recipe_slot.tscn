@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://duul3fnx8hw6n"]
+
+[ext_resource type="Script" path="res://inventory/recipe_slot.gd" id="1_14lmj"]
+
+[node name="RecipeSlot" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_14lmj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+expand_mode = 1

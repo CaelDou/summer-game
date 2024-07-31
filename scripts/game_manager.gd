@@ -15,6 +15,8 @@ var rubedo_count = 0
 # is connected to interface.gd's update_resources function
 signal updated_resources(nigredo, citrinitas, albedo, rubedo)
 
+signal updated_health(health)
+
 func increase_ingredient(vein_type, amount: int):
 	# update value depending on the vein type received
 	match vein_type:
@@ -29,3 +31,6 @@ func increase_ingredient(vein_type, amount: int):
 	
 	# activate the signal passing the counts as the paramenters
 	emit_signal("updated_resources", nigredo_count, citrinitas_count, albedo_count, rubedo_count)
+
+func update_health(health):
+	emit_signal("updated_health", health)

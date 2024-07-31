@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://qtaggxowjwe6"]
+[gd_scene load_steps=7 format=3 uid="uid://qtaggxowjwe6"]
 
 [ext_resource type="PackedScene" uid="uid://b86udfs5crd6r" path="res://scenes/interface/resource_panel.tscn" id="1_xre35"]
 [ext_resource type="Texture2D" uid="uid://grgyjndahg0k" path="res://art/ _nigredo_still.png" id="2_05idk"]
 [ext_resource type="Texture2D" uid="uid://ck6dsvigtoepa" path="res://art/_citrinitas_still.png" id="3_v3s0u"]
 [ext_resource type="Texture2D" uid="uid://qum3sq4pixnh" path="res://art/_albedo_still.png" id="4_degrr"]
 [ext_resource type="Texture2D" uid="uid://6ijav2aaxvyj" path="res://art/_rubedo_still.png" id="5_0dvvf"]
+[ext_resource type="Texture2D" uid="uid://b8rc5qc7kfaba" path="res://art/heart.png" id="6_gfn85"]
 
 [node name="Interface" type="Control"]
 layout_mode = 3
@@ -16,7 +17,7 @@ grow_vertical = 2
 
 [node name="ResourcePanel" parent="." instance=ExtResource("1_xre35")]
 layout_mode = 0
-scale = Vector2(2.92, 2.92)
+scale = Vector2(3.64, 3.64)
 
 [node name="MarginContainer" parent="ResourcePanel" index="0"]
 theme_override_constants/margin_left = -1
@@ -52,5 +53,26 @@ theme_override_font_sizes/font_size = 14
 [node name="RubedoLabel" parent="ResourcePanel/MarginContainer/GridContainer" index="7"]
 theme_override_colors/font_color = Color(0.717647, 0.278431, 0.192157, 1)
 theme_override_font_sizes/font_size = 14
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 198.0
+offset_right = 42.0
+offset_bottom = 238.0
+scale = Vector2(3, 3)
+texture = ExtResource("6_gfn85")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 41.0
+offset_top = -1.33333
+offset_right = 81.0
+offset_bottom = 34.6667
+theme_override_colors/font_color = Color(0.929412, 0.156863, 0.156863, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 26
+text = "20"
 
 [editable path="ResourcePanel"]

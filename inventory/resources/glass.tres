@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=5 format=3 uid="uid://b4ifkrsjt6lag"]
+
+[ext_resource type="Texture2D" uid="uid://d0mcmopprflw0" path="res://art/glass_bottle.png" id="1_5p8ud"]
+[ext_resource type="Resource" uid="uid://s7piofs1kued" path="res://inventory/resources/citrinitas.tres" id="2_shn2u"]
+[ext_resource type="Resource" uid="uid://ck30uaxtyt7kk" path="res://inventory/resources/sand.tres" id="3_yuweh"]
+[ext_resource type="Script" path="res://inventory/items/item.gd" id="4_77u4t"]
+
+[resource]
+script = ExtResource("4_77u4t")
+icon = ExtResource("1_5p8ud")
+name = "Glass"
+recipe = Array[ExtResource("4_77u4t")]([ExtResource("2_shn2u"), ExtResource("3_yuweh")])
+type = "Resource"
